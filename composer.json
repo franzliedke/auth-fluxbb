@@ -1,0 +1,21 @@
+{
+    "name": "franzliedke/auth-fluxbb",
+    "description": "A package for external authentication with FluxBB 1.5.",
+    "authors": [
+        {
+            "name": "Franz Liedke",
+            "email": "franz@develophp.org"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.0.x",
+        "illuminate/auth": "4.0.x"
+    },
+    "autoload": {
+        "psr-0": {
+            "FranzLiedke\\AuthFluxBB": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
