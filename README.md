@@ -25,14 +25,18 @@ line to the `providers` array:
 
     'FranzLiedke\AuthFluxBB\AuthFluxBBServiceProvider',
 
-### Step 3: Set up the database connection to your FluxBB board
+### Step 3: Configure the location of your FluxBB installation
 
-At the end of `app/start/global.php`, add the following line:
+In order to read some configuration values, the path to your FluxBB installation
+needs to be configured.
 
-    define('PUN_ROOT', '/path/to/your/fluxbb/');
+To copy the package configuration file, run this command:
 
-Make sure `PUN_ROOT` actually points to the root directory of your FluxBB
-installation and that it ends with a slash.
+    php artisan config:publish franzliedke/auth-fluxbb
+
+You can then edit `app/config/packages/franzliedke/auth-fluxbb/fluxbb.php`.
+Change the `path` option to point to the root directory of your FluxBB
+installation. Make sure it ends with a slash.
 
 ### Step 4: Enable the new authentication adapter
 
