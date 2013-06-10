@@ -8,7 +8,7 @@ class User implements UserInterface {
 	/**
 	 * The user properties as stored in the database.
 	 *
-	 * @param  array
+	 * @var array
 	 */
 	protected $columns;
 

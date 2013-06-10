@@ -9,7 +9,7 @@ class UserProvider implements UserProviderInterface {
 	/**
 	 * The active database connection.
 	 *
-	 * @param  \Illuminate\Database\Connection
+	 * @var \Illuminate\Database\Connection
 	 */
 	protected $database;
 
