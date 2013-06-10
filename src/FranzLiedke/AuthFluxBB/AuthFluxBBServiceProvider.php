@@ -19,10 +19,14 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
+		$this->package('franzliedke/auth-fluxbb');
+
 		// Register the FluxBB authentication driver
 		$this->app['auth']->extend('fluxbb', function($app)
 		{
-			$provider = new UserProvider($app['db']->connection());
+			$connector = $app['fluxbb.db.connector'];
+
+			$provider = new UserProvider($connector->connection());
 
 			return new Guard($provider, $app['session']);
 		});
@@ -35,7 +39,19 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		
+		$this->app['fluxbb.config'] = $this->app->share(function($app)
+		{
+			$path = $app['config']['auth-fluxbb::fluxbb.path'].'config.php';
+			return new ConfigParser($path);
+		});
+
+		$this->app['fluxbb.db.connector'] = $this->app->share(function($app)
+		{
+			$factory = $app['db.factory'];
+			$configParser = $app['fluxbb.config'];
+
+			return new DatabaseConnector($factory, $configParser);
+		});
 	}
 
 	/**
