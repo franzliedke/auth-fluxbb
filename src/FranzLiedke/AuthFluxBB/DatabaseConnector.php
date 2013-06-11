@@ -12,6 +12,13 @@ class DatabaseConnector {
 	protected $factory;
 
 	/**
+	 * The config parser instance.
+	 * 
+	 * @var \Franzliedke\AuthFluxBB\ConfigParser
+	 */
+	protected $parser;
+
+	/**
 	 * Create a new database connector.
 	 *
 	 * @param  \Illuminate\Database\Connectors\ConnectionFactory  $factory
