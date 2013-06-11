@@ -16,7 +16,6 @@ Alternately, you can use the Composer command-line tool by running this command:
     composer require franzliedke/auth-fluxbb
 
 Next, run `composer install` to actually install the package.
-(I will keep the version number up-to-date as we release new versions of FluxBB.)
 
 ### Step 2: Register the service provider
 
