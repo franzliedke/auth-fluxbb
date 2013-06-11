@@ -35,7 +35,7 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 		{
 			if ( ! defined('PUN_ROOT'))
 			{
-				define('PUN_ROOT', $app['config']['auth-fluxbb::fluxbb.path']);
+				define('PUN_ROOT', $app['config']['auth-fluxbb::path']);
 			}
 
 			include_once PUN_ROOT.'include/functions.php';
@@ -51,7 +51,7 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 	{
 		$this->app['fluxbb.config'] = $this->app->share(function($app)
 		{
-			$path = $app['config']['auth-fluxbb::fluxbb.path'].'config.php';
+			$path = $app['config']['auth-fluxbb::path'].'config.php';
 			return new ConfigParser($path);
 		});
 

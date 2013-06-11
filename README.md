@@ -33,7 +33,7 @@ To copy the package configuration file, run this command:
 
     php artisan config:publish franzliedke/auth-fluxbb
 
-You can then edit `app/config/packages/franzliedke/auth-fluxbb/fluxbb.php`.
+You can then edit `app/config/packages/franzliedke/auth-fluxbb/config.php`.
 Change the `path` option to point to the root directory of your FluxBB
 installation. Make sure it ends with a slash.
 
