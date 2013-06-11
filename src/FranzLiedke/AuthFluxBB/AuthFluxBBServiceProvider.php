@@ -1,6 +1,5 @@
 <?php namespace FranzLiedke\AuthFluxBB;
 
-use Illuminate\Auth\Guard;
 use Illuminate\Support\ServiceProvider;
 
 class AuthFluxBBServiceProvider extends ServiceProvider {
@@ -28,7 +27,18 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 
 			$provider = new UserProvider($connector->connection());
 
-			return new Guard($provider, $app['session']);
+			return new Guard($provider, $app['fluxbb.cookie.storage']);
+		});
+
+		// Once the app has booted, we can include some FluxBB files
+		$this->app->booted(function($app)
+		{
+			if ( ! defined('PUN_ROOT'))
+			{
+				define('PUN_ROOT', $app['config']['auth-fluxbb::fluxbb.path']);
+			}
+
+			include_once PUN_ROOT.'include/functions.php';
 		});
 	}
 
@@ -51,6 +61,13 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 			$configParser = $app['fluxbb.config'];
 
 			return new DatabaseConnector($factory, $configParser);
+		});
+
+		$this->app['fluxbb.cookie.storage'] = $this->app->share(function($app)
+		{
+			$configParser = $app['fluxbb.config'];
+
+			return new CookieStorage($configParser);
 		});
 	}
 
