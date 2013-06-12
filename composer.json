@@ -1,6 +1,8 @@
 {
     "name": "franzliedke/auth-fluxbb",
     "description": "A package for external authentication with FluxBB 1.5.",
+    "keywords": ["fluxbb", "authentication", "laravel"],
+    "license": "MIT",
     "authors": [
         {
             "name": "Franz Liedke",
@@ -16,6 +18,5 @@
         "psr-0": {
             "FranzLiedke\\AuthFluxBB": "src/"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
