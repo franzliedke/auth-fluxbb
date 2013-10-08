@@ -40,11 +40,13 @@ installation. Make sure it ends with a slash.
 ### Step 4: Enable the new authentication adapter
 
 In your application, edit the `app/config/auth.php` file and set the `driver`
-option to "fluxbb", so that it looks like this:
+option to "fluxbb1", so that it looks like this:
 
-    'driver' => 'fluxbb',
+    'driver' => 'fluxbb1',
 
 ## Usage
 
 Once installed, you can use the authentication feature of Laravel as you always
 do, with Laravel magically using FluxBB's database and cookie behind the scenes.
+
+**Note**: This package will not work if your FluxBB installation uses a SQLite2 database, as this database type is not supported by Laravel.
