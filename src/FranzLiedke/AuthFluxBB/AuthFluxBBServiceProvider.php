@@ -67,7 +67,7 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 		{
 			$configParser = $app['fluxbb1.config'];
 
-			return new CookieStorage($configParser);
+			return new CookieStorage($app['request'], $configParser);
 		});
 	}
 
