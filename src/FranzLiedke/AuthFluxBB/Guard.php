@@ -27,6 +27,26 @@ class Guard extends LaravelGuard {
 	}
 
 	/**
+	 * Determine if the current user is authenticated.
+	 *
+	 * @return bool
+	 */
+	public function check()
+	{
+		return ! is_null($this->user()) && $this->user()->getAuthIdentifier() > 1;
+	}
+
+	/**
+	 * Determine if the current user is a guest.
+	 *
+	 * @return bool
+	 */
+	public function guest()
+	{
+		return is_null($this->user()) || $this->user()->getAuthIdentifier() == 1;
+	}
+
+	/**
 	 * Get the currently authenticated user.
 	 *
 	 * @return \Illuminate\Auth\UserInterface|null
