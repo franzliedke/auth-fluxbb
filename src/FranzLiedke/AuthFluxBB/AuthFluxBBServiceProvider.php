@@ -21,12 +21,12 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 		$this->package('franzliedke/auth-fluxbb');
 
 		// Register the FluxBB authentication driver
-		$this->app['auth']->extend('fluxbb', function($app)
+		$this->app['auth']->extend('fluxbb1', function($app)
 		{
-			$connector = $app['fluxbb.db.connector'];
+			$connector = $app['fluxbb1.db.connector'];
 			$provider = new UserProvider($connector->connection());
 
-			return new Guard($provider, $app['fluxbb.cookie.storage']);
+			return new Guard($provider, $app['fluxbb1.cookie.storage']);
 		});
 
 		// Once the app has booted, we can include some FluxBB files
@@ -48,24 +48,24 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app['fluxbb.config'] = $this->app->share(function($app)
+		$this->app['fluxbb1.config'] = $this->app->share(function($app)
 		{
 			$path = $app['config']['auth-fluxbb::path'].'config.php';
-			
+
 			return new ConfigParser($path);
 		});
 
-		$this->app['fluxbb.db.connector'] = $this->app->share(function($app)
+		$this->app['fluxbb1.db.connector'] = $this->app->share(function($app)
 		{
 			$factory = $app['db.factory'];
-			$configParser = $app['fluxbb.config'];
+			$configParser = $app['fluxbb1.config'];
 
 			return new DatabaseConnector($factory, $configParser);
 		});
 
-		$this->app['fluxbb.cookie.storage'] = $this->app->share(function($app)
+		$this->app['fluxbb1.cookie.storage'] = $this->app->share(function($app)
 		{
-			$configParser = $app['fluxbb.config'];
+			$configParser = $app['fluxbb1.config'];
 
 			return new CookieStorage($configParser);
 		});
