@@ -30,7 +30,7 @@ class User implements UserInterface {
 	 */
 	public function getAuthIdentifier()
 	{
-		return $this->columns['username'];
+		return $this->columns['id'];
 	}
 
 	/**
