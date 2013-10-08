@@ -24,7 +24,6 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 		$this->app['auth']->extend('fluxbb', function($app)
 		{
 			$connector = $app['fluxbb.db.connector'];
-
 			$provider = new UserProvider($connector->connection());
 
 			return new Guard($provider, $app['fluxbb.cookie.storage']);
@@ -52,6 +51,7 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 		$this->app['fluxbb.config'] = $this->app->share(function($app)
 		{
 			$path = $app['config']['auth-fluxbb::path'].'config.php';
+			
 			return new ConfigParser($path);
 		});
 
