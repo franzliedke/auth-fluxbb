@@ -64,6 +64,11 @@ class DatabaseConnector {
 		// FluxBB has multiple different database adapters for MySQL
 		if (str_contains($type, 'mysql')) return 'mysql';
 
+		// Laravel only supports SQLite3
+		if ($type == 'sqlite3') return 'sqlite';
+
+		if ($type == 'sqlite') throw new \Exception('Cannot use SQLite2 database with Laravel.');
+
 		return $type;
 	}
 
