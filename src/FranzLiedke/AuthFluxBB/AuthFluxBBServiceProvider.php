@@ -28,17 +28,6 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 
 			return new Guard($provider, $app['fluxbb1.cookie.storage']);
 		});
-
-		// Once the app has booted, we can include some FluxBB files
-		$this->app->booted(function($app)
-		{
-			if ( ! defined('PUN_ROOT'))
-			{
-				define('PUN_ROOT', $app['config']['auth-fluxbb::path']);
-			}
-
-			include_once PUN_ROOT.'include/functions.php';
-		});
 	}
 
 	/**
