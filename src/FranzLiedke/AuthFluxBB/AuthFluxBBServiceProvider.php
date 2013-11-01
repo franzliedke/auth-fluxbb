@@ -23,7 +23,7 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 		// Register the FluxBB authentication driver
 		$this->app->resolving('auth', function($auth)
 		{
-			return $auth->extend('fluxbb1', function($app)
+			$auth->extend('fluxbb1', function($app)
 			{
 				$connector = $app['fluxbb1.db.connector'];
 				$provider = new UserProvider($connector->connection());
