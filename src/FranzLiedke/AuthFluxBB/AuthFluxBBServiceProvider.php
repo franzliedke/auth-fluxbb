@@ -21,12 +21,15 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 		$this->package('franzliedke/auth-fluxbb');
 
 		// Register the FluxBB authentication driver
-		$this->app['auth']->extend('fluxbb1', function($app)
+		$this->app->resolving('auth', function($auth)
 		{
-			$connector = $app['fluxbb1.db.connector'];
-			$provider = new UserProvider($connector->connection());
+			return $auth->extend('fluxbb1', function($app)
+			{
+				$connector = $app['fluxbb1.db.connector'];
+				$provider = new UserProvider($connector->connection());
 
-			return new Guard($provider, $app['fluxbb1.cookie.storage']);
+				return new Guard($provider, $app['fluxbb1.cookie.storage']);
+			});
 		});
 	}
 
