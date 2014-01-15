@@ -19,18 +19,6 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('franzliedke/auth-fluxbb');
-
-		// Register the FluxBB authentication driver
-		$this->app->resolving('auth', function($auth)
-		{
-			$auth->extend('fluxbb1', function($app)
-			{
-				$connector = $app['fluxbb1.db.connector'];
-				$provider = new UserProvider($connector->connection());
-
-				return new Guard($provider, $app['fluxbb1.cookie.storage']);
-			});
-		});
 	}
 
 	/**
@@ -60,6 +48,18 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 			$configParser = $app['fluxbb1.config'];
 
 			return new CookieStorage($app['request'], $configParser);
+		});
+
+		// Register the FluxBB authentication driver
+		$this->app->resolving('auth', function($auth)
+		{
+			$auth->extend('fluxbb1', function($app)
+			{
+				$connector = $app['fluxbb1.db.connector'];
+				$provider = new UserProvider($connector->connection());
+
+				return new Guard($provider, $app['fluxbb1.cookie.storage']);
+			});
 		});
 	}
 
