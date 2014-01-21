@@ -5,23 +5,6 @@ use Illuminate\Support\ServiceProvider;
 class AuthFluxBBServiceProvider extends ServiceProvider {
 
 	/**
-	 * Indicates if loading of the provider is deferred.
-	 *
-	 * @var bool
-	 */
-	protected $defer = false;
-
-	/**
-	 * Bootstrap the application events.
-	 *
-	 * @return void
-	 */
-	public function boot()
-	{
-		$this->package('franzliedke/auth-fluxbb');
-	}
-
-	/**
 	 * Register the service provider.
 	 *
 	 * @return void
@@ -64,13 +47,13 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Get the services provided by the provider.
+	 * Bootstrap the application events.
 	 *
-	 * @return array
+	 * @return void
 	 */
-	public function provides()
+	public function boot()
 	{
-		return array();
+		$this->package('franzliedke/auth-fluxbb');
 	}
 
 }
