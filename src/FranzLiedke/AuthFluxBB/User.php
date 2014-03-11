@@ -1,9 +1,9 @@
 <?php namespace FranzLiedke\AuthFluxBB;
 
-use Illuminate\Auth\UserInterface;
-use Illuminate\Database\Connection;
+use Illuminate\Auth\UserInterface as LaravelUser;
+use Symfony\Component\Security\Core\User\UserInterface as SymfonyUser;
 
-class User implements UserInterface {
+class User implements LaravelUser, SymfonyUser {
 
 	/**
 	 * The user properties as stored in the database.
@@ -41,6 +41,36 @@ class User implements UserInterface {
 	public function getAuthPassword()
 	{
 		return $this->columns['password'];
+	}
+	
+	public function getRoles()
+	{
+		//
+	}
+	
+	public function getPassword()
+	{
+		return $this->columns['password'];
+	}
+	
+	public function getSalt()
+	{
+		//
+	}
+	
+	public function getUsername()
+	{
+		return $this->columns['username'];
+	}
+	
+	public function eraseCredentials()
+	{
+		//
+	}
+	
+	public function equals(SymfonyUser $user)
+	{
+		return false;
 	}
 
 	/**
