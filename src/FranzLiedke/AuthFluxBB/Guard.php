@@ -8,7 +8,7 @@ class Guard extends LaravelGuard {
 
 	/**
 	 * The cookie storage instance.
-	 * 
+	 *
 	 * @var \FranzLiedke\AuthFluxBB\CookieStorage
 	 */
 	protected $storage;
@@ -130,7 +130,7 @@ class Guard extends LaravelGuard {
 
 	/**
 	 * If necessary, push a new cookie onto the queue.
-	 * 
+	 *
 	 * @param  mixed  $cookie
 	 * @return void
 	 */
