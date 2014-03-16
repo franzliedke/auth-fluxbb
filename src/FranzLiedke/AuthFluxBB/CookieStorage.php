@@ -94,8 +94,10 @@ class CookieStorage {
 		$hmacPassword = $this->hmac($hash, $seed.'_password_hash');
 		$hmacExpire = $this->hmac($id.'|'.$expire, $seed.'_cookie_hash');
 		$content = $id.'|'.$hmacPassword.'|'.$expire.'|'.$hmacExpire;
-
-		return new Cookie($name, $content, $expire, $path, $domain, $secure, $httpOnly);
+		
+		setcookie($name, $content, $expire, $path, $domain, $secure, $httpOnly);
+		
+		return null;
 	}
 
 	/**
@@ -119,7 +121,7 @@ class CookieStorage {
 	{
 		$cookieName = $this->parser->get('cookie_name');
 
-		$content = $this->request->cookies->get($cookieName);
+		$content = array_get($_COOKIE, $cookieName);
 
 		if ( ! is_null($content) && preg_match('%^(\d+)\|([0-9a-fA-F]+)\|(\d+)\|([0-9a-fA-F]+)$%', $content, $matches))
 		{
