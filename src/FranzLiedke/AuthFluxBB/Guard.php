@@ -91,7 +91,7 @@ class Guard extends LaravelGuard {
 		$password = $user->getAuthPassword();
 
 		$cookie = $this->storage->login($id, $password, $remember);
-		$this->getCookieJar()->queue($cookie);
+		$this->queueCookie($cookie);
 
 		// If we have an event dispatcher instance set we will fire an event so that
 		// any listeners will hook into the authentication events and run actions
@@ -125,7 +125,21 @@ class Guard extends LaravelGuard {
 	 */
 	protected function clearUserDataFromStorage()
 	{
-		$this->getCookieJar()->queue($this->storage->logout());
+		$this->queueCookie($this->storage->logout());
+	}
+
+	/**
+	 * If necessary, push a new cookie onto the queue.
+	 * 
+	 * @param  mixed  $cookie
+	 * @return void
+	 */
+	protected function queueCookie($cookie)
+	{
+		if ( ! is_null($cookie))
+		{
+			$this->getCookieJar()->queue($cookie);
+		}
 	}
 
 }
