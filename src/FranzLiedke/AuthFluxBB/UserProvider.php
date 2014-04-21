@@ -30,7 +30,7 @@ class UserProvider implements UserProviderInterface {
 	 * @param  mixed  $identifier
 	 * @return \Illuminate\Auth\UserInterface|null
 	 */
-	public function retrieveByID($identifier)
+	public function retrieveById($identifier)
 	{
 		$result = $this->newQuery()->find($identifier);
 
@@ -38,6 +38,30 @@ class UserProvider implements UserProviderInterface {
 		{
 			return new User((array) $result);
 		}
+	}
+
+	/**
+	 * Retrieve a user by by their unique identifier and "remember me" token.
+	 *
+	 * @param  mixed  $identifier
+	 * @param  string  $token
+	 * @return \Illuminate\Auth\UserInterface|null
+	 */
+	public function retrieveByToken($identifier, $token)
+	{
+		return $this->retrieveById($identifier);
+	}
+
+	/**
+	 * Update the "remember me" token for the given user in storage.
+	 *
+	 * @param  \Illuminate\Auth\UserInterface  $user
+	 * @param  string  $token
+	 * @return void
+	 */
+	public function updateRememberToken(UserInterface $user, $token)
+	{
+		return;
 	}
 
 	/**
