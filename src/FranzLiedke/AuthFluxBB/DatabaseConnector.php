@@ -13,7 +13,7 @@ class DatabaseConnector {
 
 	/**
 	 * The config parser instance.
-	 * 
+	 *
 	 * @var \Franzliedke\AuthFluxBB\ConfigParser
 	 */
 	protected $parser;
@@ -54,7 +54,7 @@ class DatabaseConnector {
 
 	/**
 	 * Return the name of the database driver to be used.
-	 * 
+	 *
 	 * @return string
 	 */
 	protected function getDatabaseDriver()

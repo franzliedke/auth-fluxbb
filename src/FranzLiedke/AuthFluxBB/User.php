@@ -42,7 +42,7 @@ class User implements LaravelUser, SymfonyUser {
 	{
 		return $this->columns['password'];
 	}
-	
+
 	/**
 	 * Get the token value for the "remember me" session.
 	 *
@@ -73,32 +73,32 @@ class User implements LaravelUser, SymfonyUser {
 	{
 		return 'abc';
 	}
-	
+
 	public function getRoles()
 	{
 		//
 	}
-	
+
 	public function getPassword()
 	{
 		return $this->columns['password'];
 	}
-	
+
 	public function getSalt()
 	{
 		//
 	}
-	
+
 	public function getUsername()
 	{
 		return $this->columns['username'];
 	}
-	
+
 	public function eraseCredentials()
 	{
 		//
 	}
-	
+
 	public function equals(SymfonyUser $user)
 	{
 		return false;

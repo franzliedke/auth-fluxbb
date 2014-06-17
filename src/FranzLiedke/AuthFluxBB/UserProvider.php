@@ -103,7 +103,7 @@ class UserProvider implements UserProviderInterface {
 
 	/**
 	 * Return the name of the users table.
-	 * 
+	 *
 	 * @return Illuminate\Database\Query\Builder
 	 */
 	protected function newQuery()

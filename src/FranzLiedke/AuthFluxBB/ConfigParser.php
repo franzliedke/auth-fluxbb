@@ -11,7 +11,7 @@ class ConfigParser {
 
 	/**
 	 * All local variables from the configuration file.
-	 * 
+	 *
 	 * @var array
 	 */
 	protected $variables;
@@ -29,7 +29,7 @@ class ConfigParser {
 
 	/**
 	 * Get the value of the variable with the given key.
-	 * 
+	 *
 	 * @param  string  $key
 	 * @return string
 	 */
@@ -42,7 +42,7 @@ class ConfigParser {
 
 	/**
 	 * Get all variables that were defined in the configuration file.
-	 * 
+	 *
 	 * @return array
 	 */
 	protected function variables()

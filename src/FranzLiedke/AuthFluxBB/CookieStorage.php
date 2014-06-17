@@ -14,7 +14,7 @@ class CookieStorage {
 
 	/**
 	 * The config parser instance.
-	 * 
+	 *
 	 * @var \FranzLiedke\AuthFluxBB\ConfigParser
 	 */
 	protected $parser;
@@ -56,7 +56,7 @@ class CookieStorage {
 
 	/**
 	 * Destroy the cookie for the current user.
-	 * 
+	 *
 	 * @return \Symfony\Component\HttpFoundation\Cookie
 	 */
 	public function logout()
@@ -66,7 +66,7 @@ class CookieStorage {
 
 		// The cookie expires after a year
 		$expire = time() + 31536000;
-		
+
 		// Overwrite our cookie with one for a guest
 		return $this->setcookie($id, $hash, $expire);
 	}
@@ -94,9 +94,9 @@ class CookieStorage {
 		$hmacPassword = $this->hmac($hash, $seed.'_password_hash');
 		$hmacExpire = $this->hmac($id.'|'.$expire, $seed.'_cookie_hash');
 		$content = $id.'|'.$hmacPassword.'|'.$expire.'|'.$hmacExpire;
-		
+
 		setcookie($name, $content, $expire, $path, $domain, $secure, $httpOnly);
-		
+
 		return null;
 	}
 
@@ -114,7 +114,7 @@ class CookieStorage {
 
 	/**
 	 * Read the current user's identifier from the cookie.
-	 * 
+	 *
 	 * @return id|null
 	 */
 	public function getId()
