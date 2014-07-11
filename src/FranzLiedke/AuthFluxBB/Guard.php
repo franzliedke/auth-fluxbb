@@ -72,8 +72,9 @@ class Guard extends LaravelGuard {
 
 		if ( ! is_null($id))
 		{
+			list($id, $remember) = $id;
 			$user = $this->provider->retrieveByID($id);
-			$this->setLoginCookie($user);
+			$this->setLoginCookie($user, $remember);
 		}
 
 		return $this->user = $user;

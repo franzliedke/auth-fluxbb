@@ -108,7 +108,7 @@ class CookieStorage {
 	/**
 	 * Read the current user's identifier from the cookie.
 	 *
-	 * @return id|null
+	 * @return array|null
 	 */
 	public function getId()
 	{
@@ -118,7 +118,12 @@ class CookieStorage {
 
 		if ( ! is_null($content) && preg_match('%^(\d+)\|([0-9a-fA-F]+)\|(\d+)\|([0-9a-fA-F]+)$%', $content, $matches))
 		{
-			return intval($matches[1]);
+			$id = intval($matches[1]);
+			$expire = intval($matches[3]);
+
+			$remember = $expire > time() + 1800;
+
+			return array($id, $remember);
 		}
 
 		return null;
