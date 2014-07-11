@@ -73,6 +73,7 @@ class Guard extends LaravelGuard {
 		if ( ! is_null($id))
 		{
 			$user = $this->provider->retrieveByID($id);
+			$this->setLoginCookie($user);
 		}
 
 		return $this->user = $user;
@@ -87,11 +88,7 @@ class Guard extends LaravelGuard {
 	 */
 	public function login(UserInterface $user, $remember = false)
 	{
-		$id = $user->getAuthIdentifier();
-		$password = $user->getAuthPassword();
-
-		$cookie = $this->storage->login($id, $password, $remember);
-		$this->queueCookie($cookie);
+		$this->setLoginCookie($user, $remember);
 
 		// If we have an event dispatcher instance set we will fire an event so that
 		// any listeners will hook into the authentication events and run actions
@@ -102,6 +99,22 @@ class Guard extends LaravelGuard {
 		}
 
 		$this->setUser($user);
+	}
+	
+	/**
+	 * Set or refresh our cookies.
+	 * 
+	 * @param  \Illuminate\Auth\UserInterface  $user
+	 * @param  bool  $remember
+	 * @return void
+	 */
+	protected function setLoginCookie(UserInterface $user, $remember = false)
+	{
+		$id = $user->getAuthIdentifier();
+		$password = $user->getAuthPassword();
+
+		$cookie = $this->storage->login($id, $password, $remember);
+		$this->queueCookie($cookie);
 	}
 
 	/**
