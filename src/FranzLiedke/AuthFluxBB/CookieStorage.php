@@ -42,9 +42,9 @@ class CookieStorage {
 	 */
 	public function login($id, $password, $remember)
 	{
-		$expire = $remember ? time() + 1209600 : 0;
+		$expire = $remember ? 1209600 : 1800;
 
-		return $this->setcookie($id, $password, $expire);
+		return $this->setcookie($id, $password, time() + $expire);
 	}
 
 	/**
