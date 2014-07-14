@@ -16,9 +16,6 @@
         "symfony/security": "~2.4"
     },
     "autoload": {
-        "classmap": [
-            "src/controllers"
-        ],
         "psr-0": {
             "FranzLiedke\\AuthFluxBB": "src/"
         }
