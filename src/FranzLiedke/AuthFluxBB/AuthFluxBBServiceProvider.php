@@ -1,8 +1,9 @@
 <?php namespace FranzLiedke\AuthFluxBB;
 
+use Illuminate\Auth\Reminders\ReminderServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
-class AuthFluxBBServiceProvider extends ServiceProvider {
+class AuthFluxBBServiceProvider extends ReminderServiceProvider {
 
 	/**
 	 * Register the service provider.
@@ -11,6 +12,7 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
+		parent::register();
 		$this->app['fluxbb1.config'] = $this->app->share(function($app)
 		{
 			$path = $app['config']['auth-fluxbb::path'].'config.php';
@@ -56,4 +58,18 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 		$this->package('franzliedke/auth-fluxbb');
 	}
 
+	/**
+	 * Register the reminder repository implementation.
+	 *
+	 * @return void
+	 */
+	protected function registerReminderRepository()
+	{
+		$this->app->bindShared('auth.reminder.repository', function($app)
+		{
+			$connection = $app['db']->connection();
+
+			return new FluxReminderRepository($connection);
+		});
+	}
 }
