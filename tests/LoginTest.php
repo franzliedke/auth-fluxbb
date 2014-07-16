@@ -17,15 +17,15 @@ class LoginTest extends PHPUnit_Framework_TestCase {
 		$guard = new FranzLiedke\AuthFluxBB\Guard($provider, $cookieStorage);
 		$guard->setDispatcher($event);
 
-		$credentials = ['username' => 'user', 'password' => 'pass'];
+		$credentials = array('username' => 'user', 'password' => 'pass');
 		$user = new User($credentials);
 		$user->id = 1234;
 		$provider->shouldReceive('retrieveByCredentials')->once()->with($credentials)->andReturn($user);
 		$provider->shouldReceive('validateCredentials')->once()->with($user, $credentials)->andReturn(true);
 		$cookieStorage->shouldReceive('login')->once()->with(1234, 'pass', false);
 
-		$event->shouldReceive('fire')->once()->with('auth.attempt',[$credentials, false, true]);
-		$event->shouldReceive('fire')->once()->with('auth.login', [$user, false]);
+		$event->shouldReceive('fire')->once()->with('auth.attempt', array($credentials, false, true));
+		$event->shouldReceive('fire')->once()->with('auth.login', array($user, false));
 
 		$guard->attempt($credentials);
 
@@ -39,7 +39,7 @@ class LoginTest extends PHPUnit_Framework_TestCase {
 		$cookieStorage = m::mock('FranzLiedke\AuthFluxBB\CookieStorage');
 		$guard = new FranzLiedke\AuthFluxBB\Guard($provider, $cookieStorage);
 
-		$credentials = ['username' => 'user', 'password' => 'pass'];
+		$credentials = array('username' => 'user', 'password' => 'pass');
 		$user = new User($credentials);
 		$user->id = 1234;
 
@@ -77,7 +77,7 @@ class LoginTest extends PHPUnit_Framework_TestCase {
 		$cookieStorage = m::mock('FranzLiedke\AuthFluxBB\CookieStorage');
 		$guard = new FranzLiedke\AuthFluxBB\Guard($provider, $cookieStorage);
 
-		$credentials = ['username' => 'user', 'password' => 'pass'];
+		$credentials = array('username' => 'user', 'password' => 'pass');
 		$user = new User($credentials);
 		$user->id = 1234;
 		$provider->shouldReceive('retrieveById')->once()->with(1234)->andReturn($user);
@@ -106,7 +106,7 @@ class LoginTest extends PHPUnit_Framework_TestCase {
 		$cookieStorage = m::mock('FranzLiedke\AuthFluxBB\CookieStorage');
 		$guard = new FranzLiedke\AuthFluxBB\Guard($provider, $cookieStorage);
 
-		$credentials = ['username' => 'user', 'password' => 'pass'];
+		$credentials = array('username' => 'user', 'password' => 'pass');
 		$user = new User($credentials);
 		$user->id = 1234;
 		$provider->shouldReceive('retrieveById')->once()->with(1234)->andReturn($user);
