@@ -65,7 +65,7 @@ class LoginTest extends PHPUnit_Framework_TestCase {
 
 		$user = new User(array('password' => 'pass'));
 		$user->id = 1234;
-		$cookieStorage->shouldReceive('getId')->once()->andReturn([1234, false]);
+		$cookieStorage->shouldReceive('getId')->once()->andReturn(array(1234, false));
 		$provider->shouldReceive('retrieveById')->once()->with(1234)->andReturn($user);
 		$cookieStorage->shouldReceive('login')->once()->with(1234, 'pass', false);
 
