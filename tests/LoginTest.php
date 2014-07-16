@@ -1,7 +1,9 @@
 <?php
 
-use FranzLiedke\AuthFluxBB\User;
 use Mockery as m;
+use FranzLiedke\AuthFluxBB\User;
+use FranzLiedke\AuthFluxBB\Guard;
+
 class LoginTest extends PHPUnit_Framework_TestCase {
 
 	/**
@@ -14,7 +16,7 @@ class LoginTest extends PHPUnit_Framework_TestCase {
 		$provider = m::mock('Illuminate\Auth\UserProviderInterface');
 		$cookieStorage = m::mock('FranzLiedke\AuthFluxBB\CookieStorage');
 		$event = m::mock('Illuminate\Events\Dispatcher');
-		$guard = new FranzLiedke\AuthFluxBB\Guard($provider, $cookieStorage);
+		$guard = new Guard($provider, $cookieStorage);
 		$guard->setDispatcher($event);
 
 		$credentials = array('username' => 'user', 'password' => 'pass');
@@ -37,7 +39,7 @@ class LoginTest extends PHPUnit_Framework_TestCase {
 	{
 		$provider = m::mock('Illuminate\Auth\UserProviderInterface');
 		$cookieStorage = m::mock('FranzLiedke\AuthFluxBB\CookieStorage');
-		$guard = new FranzLiedke\AuthFluxBB\Guard($provider, $cookieStorage);
+		$guard = new Guard($provider, $cookieStorage);
 
 		$credentials = array('username' => 'user', 'password' => 'pass');
 		$user = new User($credentials);
@@ -59,7 +61,7 @@ class LoginTest extends PHPUnit_Framework_TestCase {
 	{
 		$provider = m::mock('Illuminate\Auth\UserProviderInterface');
 		$cookieStorage = m::mock('FranzLiedke\AuthFluxBB\CookieStorage');
-		$guard = new FranzLiedke\AuthFluxBB\Guard($provider, $cookieStorage);
+		$guard = new Guard($provider, $cookieStorage);
 
 		$user = new User(array('password' => 'pass'));
 		$user->id = 1234;
@@ -75,7 +77,7 @@ class LoginTest extends PHPUnit_Framework_TestCase {
 	{
 		$provider = m::mock('Illuminate\Auth\UserProviderInterface');
 		$cookieStorage = m::mock('FranzLiedke\AuthFluxBB\CookieStorage');
-		$guard = new FranzLiedke\AuthFluxBB\Guard($provider, $cookieStorage);
+		$guard = new Guard($provider, $cookieStorage);
 
 		$credentials = array('username' => 'user', 'password' => 'pass');
 		$user = new User($credentials);
@@ -93,7 +95,7 @@ class LoginTest extends PHPUnit_Framework_TestCase {
 	{
 		$provider = m::mock('Illuminate\Auth\UserProviderInterface');
 		$cookieStorage = m::mock('FranzLiedke\AuthFluxBB\CookieStorage');
-		$guard = new FranzLiedke\AuthFluxBB\Guard($provider, $cookieStorage);
+		$guard = new Guard($provider, $cookieStorage);
 
 		$cookieStorage->shouldReceive('getId')->once()->andReturn(null);
 
@@ -104,7 +106,7 @@ class LoginTest extends PHPUnit_Framework_TestCase {
 	{
 		$provider = m::mock('Illuminate\Auth\UserProviderInterface');
 		$cookieStorage = m::mock('FranzLiedke\AuthFluxBB\CookieStorage');
-		$guard = new FranzLiedke\AuthFluxBB\Guard($provider, $cookieStorage);
+		$guard = new Guard($provider, $cookieStorage);
 
 		$credentials = array('username' => 'user', 'password' => 'pass');
 		$user = new User($credentials);
