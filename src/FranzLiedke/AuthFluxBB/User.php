@@ -3,11 +3,10 @@
 use Illuminate\Auth\UserInterface as LaravelUser;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUser;
 use Illuminate\Auth\Reminders\RemindableInterface;
-use Illuminate\Auth\Reminders\RemindableTrait;
 
 class User implements LaravelUser, SymfonyUser, RemindableInterface {
 
-	use RemindableTrait;
+
 
 	/**
 	 * The user properties as stored in the database.
@@ -106,6 +105,16 @@ class User implements LaravelUser, SymfonyUser, RemindableInterface {
 	public function equals(SymfonyUser $user)
 	{
 		return false;
+	}
+	
+	/**
+	 * Get the e-mail address where password reminders are sent.
+	 *
+	 * @return string
+	 */
+	public function getReminderEmail()
+	{
+		return $this->email;
 	}
 
 	/**
