@@ -55,5 +55,4 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 	{
 		$this->package('franzliedke/auth-fluxbb');
 	}
-
 }

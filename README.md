@@ -44,6 +44,12 @@ option to "fluxbb1", so that it looks like this:
 
     'driver' => 'fluxbb1',
 
+### Step 5 (optional): Set up views for resetting passwords
+
+The reset system that comes with Laravel works almost out of the box. Just change the reset callback function so that `sha1` is used rather than `Hash::make`, and use a DB query rather than Eloquent's `save`.
+
+In case you want the same process as in FluxBB behind the scenes (not using a separate table for reset tokens, and generating a new password rather than letting the user choose), bind `FluxReminderRepository` as `'auth.reminder.repository'` in a service provider. Do note that this requires extra work, since you'll need to tweak the controller (only one POST method will be used).
+
 ## Usage
 
 Once installed, you can use the authentication feature of Laravel as you always
