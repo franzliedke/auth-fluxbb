@@ -20,16 +20,25 @@ class CookieStorage {
 	protected $parser;
 
 	/**
+	 * The config reader instance.
+	 *
+	 * @var \FranzLiedke\AuthFluxBB\ConfigReader
+	 */
+	protected $config;
+
+	/**
 	 * Create a new cookie storage.
 	 *
 	 * @param  \Symfony\Component\HttpFoundation\Request  $request
 	 * @param  \FranzLiedke\AuthFluxBB\ConfigParser  $parser
+	 * @param  \FranzLiedke\AuthFluxBB\ConfigReader  $reader
 	 * @return void
 	 */
-	public function __construct(Request $request, ConfigParser $parser)
+	public function __construct(Request $request, ConfigParser $parser, ConfigReader $reader)
 	{
 		$this->request = $request;
 		$this->parser = $parser;
+		$this->config = $reader;
 	}
 
 	/**
@@ -42,7 +51,7 @@ class CookieStorage {
 	 */
 	public function login($id, $password, $remember)
 	{
-		$expire = $remember ? 1209600 : 1800;
+		$expire = $remember ? 1209600 : $this->config->get('o_timeout_visit');
 
 		return $this->setcookie($id, $password, time() + $expire);
 	}

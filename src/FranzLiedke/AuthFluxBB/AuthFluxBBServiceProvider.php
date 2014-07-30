@@ -29,8 +29,9 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 		$this->app['fluxbb1.cookie.storage'] = $this->app->share(function($app)
 		{
 			$configParser = $app['fluxbb1.config'];
+			$configReader = $app['fluxbb1.config.reader'];
 
-			return new CookieStorage($app['request'], $configParser);
+			return new CookieStorage($app['request'], $configParser, $configReader);
 		});
 
 		$this->app['fluxbb1.config.reader'] = $this->app->share(function($app)
