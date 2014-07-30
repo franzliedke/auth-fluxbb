@@ -13,7 +13,7 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 	{
 		$this->app['fluxbb1.config'] = $this->app->share(function($app)
 		{
-			$path = $app['config']['auth-fluxbb::path'].'config.php';
+			$path = $app['config']['auth-fluxbb::path'] . 'config.php';
 
 			return new ConfigParser($path);
 		});
@@ -32,6 +32,16 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 
 			return new CookieStorage($app['request'], $configParser);
 		});
+
+		$this->app['fluxbb1.config.reader'] = $this->app->share(function($app)
+		{
+			$connector = $app['fluxbb1.db.connector'];
+
+			$connection = $connector->connection();
+			$cachePath = $app['config']['auth-fluxbb::path'] . '/cache';
+
+			return new ConfigReader($connection, $cachePath);
+		})
 
 		// Register the FluxBB authentication driver
 		$this->app->resolving('auth', function($auth)
