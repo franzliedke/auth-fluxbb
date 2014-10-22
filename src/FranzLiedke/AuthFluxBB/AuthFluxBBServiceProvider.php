@@ -42,7 +42,7 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 			$cachePath = $app['config']['auth-fluxbb::path'] . '/cache';
 
 			return new ConfigReader($connection, $cachePath);
-		})
+		});
 
 		// Register the FluxBB authentication driver
 		$this->app->resolving('auth', function($auth)
