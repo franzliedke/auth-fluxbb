@@ -44,6 +44,14 @@ class AuthFluxBBServiceProvider extends ServiceProvider {
 				return new Guard($provider, $app['fluxbb1.cookie.storage']);
 			});
 		});
+
+		// Make sure the FluxBB cookie will not be encrypted
+		$this->app->resolving('Illuminate\Cookie\Middleware\EncryptCookies', function($middleware)
+		{
+			$configParser = $this->app->make('fluxbb1.config');
+			
+			$middleware->disableFor($this->parser->get('cookie_name'));
+		});
 	}
 
 	/**
